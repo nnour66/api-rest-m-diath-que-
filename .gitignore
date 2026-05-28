@@ -1,0 +1,32 @@
+# ==========================================
+# .gitignore pour API Spring Boot / Maven
+# ==========================================
+
+# 1. Dossier de compilation Maven (L'usine jetable)
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+dependency-reduced-pom.xml
+
+# 2. Fichiers compilés Java (Les binaires)
+*.class
+*.log
+*.jar
+*.war
+
+# 3. La base de données locale (Ton coffre-fort !)
+# On bloque ça pour ne pas envoyer les données des clients sur GitHub
+database.db
+*.sqlite
+*.sqlite3
+*.db
+
+# 4. Paramètres de l'éditeur VS Code (Tes réglages perso)
+.vscode/
+.history/
+*.code-workspace
+
+# 5. Fichiers système (Inutiles sur le net)
+.DS_Store
+Thumbs.db
