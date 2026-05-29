@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 import com.portfolio.mediatheque.model.Livre;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 /**
@@ -56,6 +58,25 @@ public class LivreController {
     public Livre creatLivre(@RequestBody Livre nouveaLivre){
         return livreRepository.save(nouveaLivre);
     }
+
+
+    /**
+     * @DeleteMapping ("/{id}") Indique à Spring Boot que cette 
+     * méthode doit être appelée uniquement si on reçoit une requête
+     * HTTP de type DELETE. l'URL contient une valeur supplémentaire 
+     * à la fin (par exemple /api/livres/1). Les accolades {id} signifient 
+     * que cette partie est dynamique.
+     * @PathVariable C'est le lien direct avec le {id} du dessus. 
+     * Ça dit à Spring : "Prends le chiffre qui se trouve à la fin de l'URL, 
+     * et mets-le dans la variable Java id".
+     * C'est le lien direct avec le {id} du dessus. Ça dit à Spring : "Prends 
+     * le chiffre qui se trouve à la fin de l'URL, et mets-le dans la variable Java id".
+     */
+    @DeleteMapping("/{id}")
+    public void deleteLivre(@PathVariable Long id){
+        livreRepository.deleteById(id);
+    }
+
 }
 
 
