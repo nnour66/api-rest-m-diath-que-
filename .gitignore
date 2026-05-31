@@ -26,6 +26,7 @@ database.db
 .vscode/
 .history/
 *.code-workspace
+[Help
 
 # 5. Fichiers système (Inutiles sur le net)
 .DS_Store
