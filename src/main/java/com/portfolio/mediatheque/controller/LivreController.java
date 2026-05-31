@@ -11,6 +11,7 @@ import com.portfolio.mediatheque.model.Livre;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import jakarta.validation.Valid;
 
 
 /**
@@ -56,7 +57,7 @@ public class LivreController {
      * @return Insertion dans la base de données.
      */
     @PostMapping
-    public Livre creatLivre(@RequestBody Livre nouveaLivre){
+    public Livre creatLivre(@Valid @RequestBody Livre nouveaLivre){
         return livreRepository.save(nouveaLivre);
     }
 
@@ -90,7 +91,7 @@ public class LivreController {
      * @livreRepository.save c'est la mm avec la méthode POST, mais il fait juste la mise à jour. 
      */
     @PutMapping("/{id}")
-    public Livre updateLivre(@PathVariable Long id, @RequestBody Livre detailsLivre) {
+    public Livre updateLivre(@PathVariable Long id, @Valid @RequestBody Livre detailsLivre) {
        // Étape A : On cherche le livre existant dans la base de données
         Livre livreExistant = livreRepository.findById(id).orElseThrow();
         
