@@ -10,6 +10,7 @@ import java.util.List;
 import com.portfolio.mediatheque.model.Livre;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 
 
 /**
@@ -76,6 +77,32 @@ public class LivreController {
     public void deleteLivre(@PathVariable Long id){
         livreRepository.deleteById(id);
     }
+
+
+    /**
+     * @PutMapping Cette méthode s'applique sur une requette HTTP PUT en pointant sur l'id.
+     * @param id ID spécifique.
+     * @PathVariable et @RequestBody : On combine les deux, pour attraper
+     * l'ID dans l'URL et on attrape le texte JSON pour le transformer en objet 
+     * detailsLivre.
+     * .orElseThrow just ou cas ou l'URL n'existe pas ça retourne une erreur 
+     * au lieu de planter le programme.
+     * @livreRepository.save c'est la mm avec la méthode POST, mais il fait juste la mise à jour. 
+     */
+    @PutMapping("/{id}")
+    public Livre updateLivre(@PathVariable Long id, @RequestBody Livre detailsLivre) {
+       // Étape A : On cherche le livre existant dans la base de données
+        Livre livreExistant = livreRepository.findById(id).orElseThrow();
+        
+        // Étape B : On met à jour ses informations avec les nouvelles données
+        livreExistant.setTitre(detailsLivre.getTitre());
+        livreExistant.setAuteur(detailsLivre.getAuteur());
+        livreExistant.setIsbn(detailsLivre.getIsbn());
+
+        // Étape C : On sauvegarde et on renvoie le livre mis à jour
+        return livreRepository.save(livreExistant);
+    }
+
 
 }
 
